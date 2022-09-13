@@ -1,7 +1,6 @@
 from tf_agents.replay_buffers import tf_uniform_replay_buffer 
 from tf_agents.trajectories import trajectory
-from tf_agents.utils import common
-
+import os
 
 class train_driver:
     
@@ -18,15 +17,6 @@ class train_driver:
         replay_buffer_observer = self.replay_buffer.add_batch
         
         observers = [replay_buffer_observer]
-        
-        self.train_checkpointer = common.Checkpointer(
-            ckpt_dir=checkpoint_dir,
-            max_to_keep=1,
-            agent=self.agent,
-            policy=self.agent.policy,
-            replay_buffer=self.replay_buffer,
-            global_step=self.agent.train_step_counter
-        )
         
     def compute_avg_return(self, num_episodes=10):
         total_return = 0.0
@@ -100,15 +90,15 @@ class train_driver:
         avg_return = self.compute_avg_return()
         print('step = {0}: Average Return = {1}'.format(step, avg_return))
         returns.append(avg_return)
-        self.save_checkpoint(iterations)
+        self.save_checkpoint(episode)
                 
         return returns, losses
     
-    def save_checkpoint(self):
-        self.train_checkpointer.save(self.agent.train_step_counter)
+    def save_checkpoint(self, episode):
+        self.agent.save_checkpoint(episode)
         
-    def load_checkpoint(self):
-        self.train_checkpointer.initialize_or_restore()
+    def load_checkpoint(self, path):
+        self.agent.load_checkpoint(episode)
         
         
         

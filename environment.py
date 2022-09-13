@@ -60,26 +60,26 @@ class SnakeEnvironment(PyEnvironment):
         self._episode_ended = False
         self.steps = 0
         self.repeated_move_check = []
+        self.score = 0
         return ts.restart(self._state)
 
     def _step(self, action):
         self.steps += 1
-        move = action#int(action.action.numpy())
-        if move in self.repeated_move_check:
-            self.repeated_move_check.append(move)
+        
+        if action in self.repeated_move_check:
+            self.repeated_move_check.append(action)
         else:
-            self.repeated_move_check = [move]
+            self.repeated_move_check = [action]
             
         
-        if (self.steps >= 5000) or (len(self.repeated_move_check) > 25):
-            result, self._state, score = update(self._state, action)
-            print(f'max steps ({self.steps}) or repeated moves\nscore = {score}')
+        if (self.steps >= 1000) or (len(self.repeated_move_check) > 25):
+            print(f'max steps ({self.steps}) or repeated moves\nscore = {self.score}')
             return ts.termination(self._state, -1)
 
-        result, self._state, score = update(self._state, action)
+        result, self._state, self.score = update(self._state, action)
 
         if result == -1:
-            print(f'score = {score}')
+            print(f'score = {self.score}')
             return ts.termination(self._state, -1)
         
         else:
