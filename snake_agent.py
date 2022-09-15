@@ -14,6 +14,9 @@ class SnakeAgent(dqn_agent.DqnAgent):
                 env,
                 fc_layer_params = (100, 50),
                 learning_rate = 0.001,
+                epsilon_greedy = 0.3,
+                checkpoint_dir = 'checkpoint',
+                restore = False,
                 **dqn_kwargs):
         
         self.q_net = q_network.QNetwork(
@@ -22,22 +25,28 @@ class SnakeAgent(dqn_agent.DqnAgent):
             fc_layer_params = fc_layer_params
         )
         self.optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+        
+        
+        
         train_step_counter = tf.Variable(0)
         super().__init__(env.time_step_spec(),
                      env.action_spec(),
                      self.q_net,
                      self.optimizer,
+                     epsilon_greedy=epsilon_greedy,
                      td_errors_loss_fn=common.element_wise_squared_loss,
                      train_step_counter=train_step_counter,
-                     **dqn_kwargs)#
+                     **dqn_kwargs)
+        
+        self.checkpointer = common.Checkpointer(ckpt_dir=checkpoint_dir,
+                                          agent=self,
+                                          policy=self.policy)
+        
+        if restore:
+            self.checkpointer.initialize_or_restore()
         
     def save_checkpoint(self, episode):
-        checkpoint = Checkpoint(q_net=self.q_net)
-        save_dir = f'checkpoints/episode_{episode}'
-        if not os.path.isdir(save_dir):
-            os.mkdir(save_dir)
-        checkpoint.save(os.path.join(save_dir, 'checkpoint'))
+        self.checkpointer.save(episode)
         
-    def load_checkpoint(self, path):
-        checkpoint = Checkpoint(q_net=self.q_net)
-        checkpoint.restore(path)
+    def load_checkpoint(self):
+        self.checkpointer.initialize_or_restore()

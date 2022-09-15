@@ -4,13 +4,12 @@ import os
 
 class train_driver:
     
-    def __init__(self, env, agent, metrics=None, log_interval=50, eval_interval=250, checkpoint_interval=1000, checkpoint_dir='checkpoints/checkpoint'):
+    def __init__(self, env, agent, metrics=None, log_interval=250, eval_interval=1000):
         
         self.env=env
         self.agent=agent
         self.log_interval = log_interval
         self.eval_interval = eval_interval
-        self.checkpoint_interval = checkpoint_interval
         self.replay_buffer = tf_uniform_replay_buffer.TFUniformReplayBuffer(data_spec=agent.collect_data_spec,
                                                                             batch_size=env.batch_size,
                                                                             max_length=1000000)
@@ -34,7 +33,7 @@ class train_driver:
         avg_return = total_return / num_episodes
         return avg_return.numpy()[0]
     
-    def complete_episode(self):
+    def complete_episode(self, log=False):
         time_step = self.env.reset()
         i = 0
         while not time_step.is_last():
@@ -46,7 +45,8 @@ class train_driver:
                                               next_step)
             self.replay_buffer.add_batch(data)
             i+=1
-        print('episode length: ', i)
+        if log:
+            print('episode length: ', i)
         
     def run(self, iterations):
         
@@ -54,7 +54,7 @@ class train_driver:
         losses=[]
         dataset = self.replay_buffer.as_dataset(
                 num_parallel_calls=3,
-                sample_batch_size=16,
+                sample_batch_size=200,
                 num_steps=2).prefetch(3)
         
         iterator = iter(dataset)
@@ -83,9 +83,6 @@ class train_driver:
                 avg_return = self.compute_avg_return()
                 print('step = {0}: Average Return = {1}'.format(step, avg_return))
                 returns.append(avg_return)
-                
-            if step % self.checkpoint_interval == 0:
-                self.save_checkpoint(episode)
    
         avg_return = self.compute_avg_return()
         print('step = {0}: Average Return = {1}'.format(step, avg_return))

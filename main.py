@@ -9,9 +9,10 @@ env = TFPyEnvironment(env)
 agent = snake_agent.SnakeAgent(env)
 agent.initialize()
 
+
 driver = train_driver(env, agent)
 
-results, losses = driver.run(10000)
+results, losses = driver.run(1)
 print(f"""
 first result = {results[0]}
 last result = {results[-1]}
