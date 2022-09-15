@@ -7,13 +7,15 @@ from train import train_driver
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-e', '--episodes', default=100)
+parser.add_argument('-r', '--restore_checkpoint', default='False')
 args = parser.parse_args()
 episodes = int(args.episodes)
+restore = bool(args.restore_checkpoint)
 
 
 env = environment.SnakeEnvironment()
 env = TFPyEnvironment(env)
-agent = snake_agent.SnakeAgent(env)
+agent = snake_agent.SnakeAgent(env, restore=restore)
 agent.initialize()
 
 
