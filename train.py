@@ -12,7 +12,7 @@ class train_driver:
         self.eval_interval = eval_interval
         self.replay_buffer = tf_uniform_replay_buffer.TFUniformReplayBuffer(data_spec=agent.collect_data_spec,
                                                                             batch_size=env.batch_size,
-                                                                            max_length=1000000)
+                                                                            max_length=10000)
         replay_buffer_observer = self.replay_buffer.add_batch
         
         observers = [replay_buffer_observer]
@@ -57,7 +57,7 @@ class train_driver:
                 sample_batch_size=200,
                 num_steps=2).prefetch(3)
         
-        iterator = iter(dataset)
+        self.iterator = iter(dataset)
 
         avg_return = self.compute_avg_return()
         returns.append(avg_return)
@@ -70,27 +70,41 @@ class train_driver:
             self.complete_episode()
             #time_step, _ = self.driver.run(time_step)
 
-            # Sample a batch of data from the buffer and update the agent's network.
-            experience, unused_info = next(iterator)
-            train_loss = self.agent.train(experience).loss
-            losses.append(train_loss)
-            step = self.agent.train_step_counter.numpy()
+            # for x in range(episode):
+            #     # Sample a batch of data from the buffer and update the agent's network.
+            #     experience, unused_info = next(iterator)
+            #     train_loss = self.agent.train(experience).loss
+            #     losses.append(train_loss)
+            episode_losses = self.train_agent(episode)
+            
+            average_episode_loss = sum(episode_losses)/len(episode_losses)
+            losses.append(average_episode_loss)
+            #step = self.agent.train_step_counter.numpy()
 
-            if step % self.log_interval == 0:
-                print('step = {0}: loss = {1}'.format(step, train_loss))
+            if episode % self.log_interval == 0:
+                print('step = {0}: loss = {1}'.format(episode, average_episode_loss))
 
-            if step % self.eval_interval == 0:
+            if episode % self.eval_interval == 0:
                 avg_return = self.compute_avg_return()
-                print('step = {0}: Average Return = {1}'.format(step, avg_return))
+                print('step = {0}: Average Return = {1}'.format(episode, avg_return))
                 returns.append(avg_return)
    
         avg_return = self.compute_avg_return()
-        print('step = {0}: Average Return = {1}'.format(step, avg_return))
+        print('step = {0}: Average Return = {1}'.format(episode, avg_return))
         returns.append(avg_return)
         self.save_checkpoint(episode)
                 
         return returns, losses
     
+    def train_agent(self, train_steps):
+        training_loss = []
+        for i in range(max(1, train_steps)):
+            # Sample a batch of data from the buffer and update the agent's network.
+            experience, unused_info = next(self.iterator)
+            train_loss = self.agent.train(experience).loss
+            training_loss.append(train_loss)
+        return training_loss
+
     def save_checkpoint(self, episode):
         self.agent.save_checkpoint(episode)
         
