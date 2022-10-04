@@ -42,17 +42,16 @@ python Interface.py
 
 ## The RL environment
 [enironment.py](https://github.com/drjjjm18/rl-snake/blob/main/environment.py) contains the code for a RL environment. This handles some key aspects of an RL training loop:
-
 * initialising the game environment
 * resetting the game environment once the game finishes
 * handling a 'step' in the environment: taking the action from an agent, and returning the result of that action and the associated award
 
 ## The RL agent
 [agent.py](https://github.com/drjjjm18/rl-snake/blob/main/snake_agent.py) contains the code for a RL agent to play the game. The default is an example of a DQN Agent, which has some key parameters:
-*fc_layer_params: these are the fully connected layers of neurons in the agent's neural network - the number of neurons and number of layers. The default gives a layer of 100 neurons and a layer of 50 neurons
-*learning_rate: the learning rate used during training the agent's neural network
-*epsilon_greedy: the chance of the agent choosing a random action (set to 0.3 by default, 30% chance)
-*checkpoint_dir: the directory the agent will save checkpoints to during and after training
+* fc_layer_params: these are the fully connected layers of neurons in the agent's neural network - the number of neurons and number of layers. The default gives a layer of 100 neurons and a layer of 50 neurons
+* learning_rate: the learning rate used during training the agent's neural network
+* epsilon_greedy: the chance of the agent choosing a random action (set to 0.3 by default, 30% chance)
+* checkpoint_dir: the directory the agent will save checkpoints to during and after training
 
 The agent also has an `optimizer`, which is set to Adam, and a `checkpointer`, which is used to save and retore checkpoints saved during training.
 
