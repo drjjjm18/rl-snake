@@ -29,12 +29,13 @@ pip install -r requirements.txt
 ```
 ## The game
 
-[MiniSnakes.py](https://github.com/drjjjm18/rl-snake/blob/main/MiniSnakes.py) contains the code for the basic snake game. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries.
+[MiniSnakes.py](https://github.com/drjjjm18/rl-snake/blob/main/MiniSnakes.py) contains the code for the basic snake game. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries (original snake rules rather than snake 2).
 
-This can be played by running [Interface.py](https://github.com/drjjjm18/rl-snake/blob/main/Interface.py): use the 'a' and 'd' keys to control the snake by turning left and right respectively.
+The can be played on your computer by running [Interface.py](https://github.com/drjjjm18/rl-snake/blob/main/Interface.py): use the 'a' and 'd' keys to control the snake by turning left and right respectively.
 
 simply run the below in a terminal:
-```python Interface.py```
+```python Interface.py
+```
 
 ## The RL environment
 [enironment.py](https://github.com/drjjjm18/rl-snake/blob/main/environment.py) contains the code for a RL environment. This handles some key aspects of an RL training loop:
