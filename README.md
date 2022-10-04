@@ -1,7 +1,32 @@
 # A reinforcement learning environment for the classic Snake game
 
-This repo contains a pre-built enviornment which can be used to experiment with tf-agents and reinforcement learning (RL).
+This repo contains a pre-built enviornment which can be used to experiment with tf-agents and reinforcement learning (RL). Here you can:
+* play snake on your computer
+* train an agent to play snake
+* watch an agent playing snake
 
+## Set up
+
+First clone the repo. In a terminal, use the following commands:
+```
+# change directory to the folder you want to clone repo in, e.g. Documents/code shown below
+cd Documents/code
+git clone https://github.com/drjjjm18/rl-snake.git
+cd rl-snake
+```
+Next make sure you have the dependencies installed. You'll need python 3, and pytorch, tensorflow and tf-agents installed. You can use requirements.txt to make sure they're installed:
+
+**Optional** Consider creating a virtual environment:
+```
+# create python venv
+python -m venv snake_env
+# activate venv - note this varies between windows, bash and mac
+snake_env\Scripts\activate # linux/bash terminal: source snake_env/Scripts/activate # mac: source snake_env/bin/activate
+```
+Install dependencies:
+```
+pip install -r requirements.txt
+``
 ## The game
 
 [MiniSnakes.py](https://github.com/drjjjm18/rl-snake/blob/main/MiniSnakes.py) contains the code for the basic snake game. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries.
@@ -46,5 +71,3 @@ After training an agent, [watch_agent.py](https://github.com/drjjjm18/rl-snake/b
 ```
 python watch_agent.py
 ```
-
-
