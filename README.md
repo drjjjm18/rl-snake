@@ -34,7 +34,8 @@ pip install -r requirements.txt
 The can be played on your computer by running [Interface.py](https://github.com/drjjjm18/rl-snake/blob/main/Interface.py): use the 'a' and 'd' keys to control the snake by turning left and right respectively.
 
 simply run the below in a terminal:
-```python Interface.py
+```
+python Interface.py
 ```
 
 ## The RL environment
