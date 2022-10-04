@@ -26,7 +26,7 @@ snake_env\Scripts\activate # linux/bash terminal: source snake_env/Scripts/activ
 Install dependencies:
 ```
 pip install -r requirements.txt
-``
+```
 ## The game
 
 [MiniSnakes.py](https://github.com/drjjjm18/rl-snake/blob/main/MiniSnakes.py) contains the code for the basic snake game. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries.
