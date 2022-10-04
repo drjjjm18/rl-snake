@@ -55,7 +55,7 @@ python Interface.py
 
 The agent also has an `optimizer`, which is set to Adam, and a `checkpointer`, which is used to save and retore checkpoints saved during training.
 
-## the RL training loop
+## The RL training loop
 
 [train.py](https://github.com/drjjjm18/rl-snake/blob/main/train.py) contains code for a train_driver class: this class handles the playing and training loop for the agent and environment. 
 
