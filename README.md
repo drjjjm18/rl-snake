@@ -1,11 +1,11 @@
-# A reinforcement learning environment for the classic Snake game
-
-<img src="nokia-snake-game.gif">
+# A reinforcement learning environment for a classic Snake style game
 
 This repo contains a pre-built enviornment which can be used to experiment with tf-agents and reinforcement learning (RL). Here you can:
 * play snake on your computer
 * train an agent to play snake
 * watch an agent playing snake
+
+<img src="nokia-snake-game.gif">
 
 ## Set up
 
