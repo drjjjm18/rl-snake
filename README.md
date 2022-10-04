@@ -42,6 +42,7 @@ python Interface.py
 
 ## The RL environment
 [enironment.py](https://github.com/drjjjm18/rl-snake/blob/main/environment.py) contains the code for a RL environment. This handles some key aspects of an RL training loop:
+
 * initialising the game environment
 * resetting the game environment once the game finishes
 * handling a 'step' in the environment: taking the action from an agent, and returning the result of that action and the associated award
