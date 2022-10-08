@@ -1,7 +1,7 @@
 import torch as t
 from torch import tensor as T
 import matplotlib.pyplot as plt
-from snake.game import do
+from game import do
 
 snake = t.zeros((24, 24), dtype=t.int)
 snake[0, :3] = T([1, 2, -1])

@@ -31,23 +31,25 @@ pip install -r requirements.txt
 ```
 ## The game
 
-[MiniSnakes.py](https://github.com/drjjjm18/rl-snake/blob/main/MiniSnakes.py) contains the code for the basic snake game. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries (original snake rules rather than snake 2).
+The [snake](https://github.com/drjjjm18/rl-snake/tree/main/snake) folder contains the code for the game and playing it.
 
-The can be played on your computer by running [interface.py](https://github.com/drjjjm18/rl-snake/blob/main/interface.py): use the 'a' and 'd' keys to control the snake by turning left and right respectively.
+[game.py](https://github.com/drjjjm18/rl-snake/blob/main/snake/game.py) contains the code for the basic snake game itself. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries (converting to the original snake rules rather than snake 2).
+
+The can be played on your computer by running [interface.py](https://github.com/drjjjm18/rl-snake/blob/main/interface.py): use the left and right arrow keys, or the 'a' and 'd' keys, to control the snake by turning left and right.
 
 simply run the below in a terminal:
 ```
-python interface.py
+python snake/interface.py
 ```
 
 ## The RL environment
-[enironment.py](https://github.com/drjjjm18/rl-snake/blob/main/environment.py) contains the code for a RL environment. This handles some key aspects of an RL training loop:
+[enironment.py](https://github.com/drjjjm18/rl-snake/blob/main/rl_env/environment.py) contains the code for a RL environment. This handles some key aspects of an RL training loop:
 * initialising the game environment
 * resetting the game environment once the game finishes
 * handling a 'step' in the environment: taking the action from an agent, and returning the result of that action and the associated award
 
 ## The RL agent
-[agent.py](https://github.com/drjjjm18/rl-snake/blob/main/snake_agent.py) contains the code for a RL agent to play the game. The default is an example of a DQN Agent, which has some key parameters:
+[agent.py](https://github.com/drjjjm18/rl-snake/blob/main/rl_env/snake_agent.py) contains the code for a RL agent to play the game. The default is an example of a DQN Agent, which has some key parameters:
 * fc_layer_params: these are the fully connected layers of neurons in the agent's neural network - the number of neurons and number of layers. The default gives a layer of 100 neurons and a layer of 50 neurons
 * learning_rate: the learning rate used during training the agent's neural network
 * epsilon_greedy: the chance of the agent choosing a random action (set to 0.3 by default, 30% chance)
@@ -57,7 +59,7 @@ The agent also has an `optimizer`, which is set to Adam, and a `checkpointer`, w
 
 ## The RL training loop
 
-[train.py](https://github.com/drjjjm18/rl-snake/blob/main/train.py) contains code for a train_driver class: this class handles the playing and training loop for the agent and environment. 
+[train.py](https://github.com/drjjjm18/rl-snake/blob/main/rl_env/train.py) contains code for a train_driver class: this class handles the playing and training loop for the agent and environment. 
 
 ## Running the loop
 
