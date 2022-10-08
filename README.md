@@ -62,16 +62,22 @@ The agent also has an `optimizer`, which is set to Adam, and a `checkpointer`, w
 ## Running the loop
 
 [main.py](https://github.com/drjjjm18/rl-snake/blob/main/main.py) can be used to train an agent. It takes two optional arguments:
-* -e: the number of episodes to play for
-* -r: whether to restore a checkpoint from the checkpoint directory
+* -e: the number of episodes to play for (int, default=100)
+* -c: the path to the directory where checkpoints will be saved (str, default='checkpoint')
+* -r: whether to restore a checkpoint from the checkpoint directory (bool, default=False)
 
 The script can be run as follows:
 ```
-python main.py -e 10000 -r False
+python main.py -e 10000 -c checkpoint_dir -r False
 ```
 
 ## Watching your agent
-After training an agent, [watch_agent.py](https://github.com/drjjjm18/rl-snake/blob/main/watch_agent.py) can be used to watch an agent play snake live. Simply run:
+After training an agent, [watch_agent.py](https://github.com/drjjjm18/rl-snake/blob/main/watch_agent.py) can be used to watch an agent play snake live.
+This takes an optional argument:
+
+* -c: the path to the directory where checkpoints will be saved (str, default='checkpoint')
+
+The script can be run with:
 ```
-python watch_agent.py
+python watch_agent.py -c checkpoint_dir
 ```
