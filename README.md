@@ -35,7 +35,7 @@ The [snake](https://github.com/drjjjm18/rl-snake/tree/main/snake) folder contain
 
 [game.py](https://github.com/drjjjm18/rl-snake/blob/main/snake/game.py) contains the code for the basic snake game itself. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries (converting to the original snake rules rather than snake 2).
 
-The can be played on your computer by running [interface.py](https://github.com/drjjjm18/rl-snake/blob/main/interface.py): use the left and right arrow keys, or the 'a' and 'd' keys, to control the snake by turning left and right.
+The can be played on your computer by running [interface.py](https://github.com/drjjjm18/rl-snake/blob/main/snake/interface.py): use the left and right arrow keys, or the 'a' and 'd' keys, to control the snake by turning left and right.
 
 simply run the below in a terminal:
 ```
