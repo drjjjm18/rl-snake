@@ -5,7 +5,7 @@ This repo contains a pre-built enviornment which can be used to experiment with 
 * train an agent to play snake
 * watch an agent playing snake
 
-<img src="nokia-snake-game.gif">
+<img src="images/nokia-snake-game.gif">
 
 ## Set up
 
@@ -33,11 +33,11 @@ pip install -r requirements.txt
 
 [MiniSnakes.py](https://github.com/drjjjm18/rl-snake/blob/main/MiniSnakes.py) contains the code for the basic snake game. This is based on the code developed in [How to write a game of snake in 12 lines of code]('https://github.com/eliasffyksen/MiniSnakes), tweaked to not allow the player to travel through the wall boundaries (original snake rules rather than snake 2).
 
-The can be played on your computer by running [Interface.py](https://github.com/drjjjm18/rl-snake/blob/main/Interface.py): use the 'a' and 'd' keys to control the snake by turning left and right respectively.
+The can be played on your computer by running [interface.py](https://github.com/drjjjm18/rl-snake/blob/main/interface.py): use the 'a' and 'd' keys to control the snake by turning left and right respectively.
 
 simply run the below in a terminal:
 ```
-python Interface.py
+python interface.py
 ```
 
 ## The RL environment

@@ -1,7 +1,7 @@
 import torch as t
 from torch import tensor as T
 import matplotlib.pyplot as plt
-from MiniSnakes import do
+from snake.game import do
 
 snake = t.zeros((24, 24), dtype=t.int)
 snake[0, :3] = T([1, 2, -1])
@@ -9,7 +9,7 @@ snake[0, :3] = T([1, 2, -1])
 fig, ax = plt.subplots(1, 1)
 img = ax.imshow(snake)
 action = {'val': 1}
-action_dict = {'a': 0, 'd': 2}
+action_dict = {'a': 0, 'd': 2, 'left': 0, 'right': 2}
 action_dict.setdefault(1)
 
 fig.canvas.mpl_connect('key_press_event', lambda e:
