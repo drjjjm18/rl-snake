@@ -1,0 +1,11 @@
+name: aws_test
+on: push
+jobs:
+  build:
+    if: contains(github.ref, 'submission')
+    runs-on: ubuntu-latest
+    steps:
+      - name: install aws cli
+        id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@master
+      - run: aws sns publish --topic-arn arn:aws:sns:us-west-2:123456789012:my-topic --message "Hello World!"
