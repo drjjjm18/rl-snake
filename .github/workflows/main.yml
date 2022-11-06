@@ -2,10 +2,10 @@ name: aws_test
 on: push
 jobs:
   build:
-    if: contains(github.ref, 'submission')
+    if: contains(github.ref, 'main')
     runs-on: ubuntu-latest
     steps:
       - name: install aws cli
         id: install-aws-cli
         uses: unfor19/install-aws-cli-action@master
-      - run: aws sns publish --topic-arn arn:aws:sns:us-west-2:123456789012:my-topic --message "Hello World!"
+      - run: aws sqs send-message --queue-url https://sqs.us-east-2.amazonaws.com/918511214686/test_queue --message-body github.ref
